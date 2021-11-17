@@ -116,6 +116,16 @@ int main(void) {
 			}
 		}
 	}
+	// Reset credit line with spaces.
+	for (char_idx=BLENDER_HEADER_LENGTH ; char_idx<LINE_BUFFER_LENGTH ; char_idx++) {
+		credit_line[char_idx] = ' ';
+	}
+	// Pad last blender line.
+	for (; blender_subline_idx<BLENDER_NUMBER_OF_LINE_PER_TEXT_OBJECT ; blender_subline_idx++) {
+		for (char_idx=0 ; char_idx<BLENDER_CREDIT_LINE_LENGTH; char_idx++) {
+			blender_line[(blender_subline_idx * BLENDER_CREDIT_LINE_LENGTH) + char_idx] = credit_line[char_idx];
+		}
+	}
 	// Print last blender line.
 	blender_line_idx++;
 	wprintf(L"Blender line %02d = %ls\n", blender_line_idx, blender_line);
